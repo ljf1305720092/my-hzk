@@ -1,19 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
+import './login.css'
+import 'semantic-ui-css/semantic.min.css'
+import Main from './module/my/main'
+import Login from './login'
 
-function Login () {
-  return (
-    <div>   
-        Home
-    </div>
-  )
-}
-
-function Home () {
-  
-  return <div>Home</div>
-}
 
 class App extends Component {
 
@@ -25,7 +17,7 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route path="/" exact component={Login}></Route>
-          <Route path="/home" component={Home}></Route>
+          <Route path="/home" component={Main}></Route>
         </Switch>
       </BrowserRouter>
     );
