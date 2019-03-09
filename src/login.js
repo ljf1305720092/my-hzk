@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Icon, Button, Divider } from 'semantic-ui-react'
+import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
 class Login extends React.Component {
@@ -33,7 +34,9 @@ class Login extends React.Component {
         let data = ret.data
         if (data.meta.status===200) {
             sessionStorage.setItem('mytoken',data.data.token)
-            console.log(data)
+            let { history } = this.props;
+            history.push('/home')
+            console.log(this.props)
         }
         console.log(data.meta.msg)
     }
@@ -78,4 +81,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default withRouter(Login);
