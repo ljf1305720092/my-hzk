@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import './login.css'
-import './module/my/main.css'
+import './module/main.css'
 import 'semantic-ui-css/semantic.min.css'
 import './assets/fonts/iconfont.css'
-import Main from './module/my/main'
+import Main from './module/main'
 import Login from './login'
 
 

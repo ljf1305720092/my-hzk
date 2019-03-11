@@ -3,7 +3,10 @@ import React from 'react';
 import { Grid } from 'semantic-ui-react';
 import { Route, Link, Switch } from "react-router-dom";
 import './main.css';
-
+import My from './my/index'
+import Info from './info/index'
+import Home from './home/index'
+import Chat from './chat/index'
 // 自定义组件：只要有链接出发，children对应的函数就会调用
 function Menu (props) {
     // console.log(props);
@@ -33,10 +36,10 @@ class Main extends React.Component {
             <div className='home-container'>
                 <div className='home-content'>
                     <Switch>
-                        <Route path='/home/cd' render={()=> <div>菜单</div>  }></Route>
-                        <Route path='/home/zx' render={()=> <div>咨询</div>  }></Route>
-                        <Route path='/home/wl' render={()=> <div>微聊</div>  }></Route>
-                        <Route path='/home/wd' render={()=> <div>我的</div>  }></Route>
+                        <Route path='/home/cd' component={My}></Route>
+                        <Route path='/home/zx' component={Info}></Route>
+                        <Route path='/home/wl' component={Home}></Route>
+                        <Route path='/home/wd' component={Chat}></Route>
                     </Switch>
                 </div>
                 <div className='home-menu'>

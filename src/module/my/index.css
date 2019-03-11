@@ -1,0 +1,12 @@
+.main-container {
+  
+}
+
+.main-container .main-searchbar {
+  height: 40px;
+  line-height: 40px;
+  width: 100%;
+}
+.main-container .main-searchbar input {
+    width: 100%;
+}
