@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Grid, Icon, Item, Button } from "semantic-ui-react";
+import { Input, Grid, Icon, Item, Button, Dimmer, Loader } from "semantic-ui-react";
 import ImageGallery from "react-image-gallery";
 import axios from 'axios'
 import "./index.css";
@@ -148,31 +148,49 @@ class My extends React.Component {
       menu: [],
       info: [],
       faq: [],
-      house: []
+      house: [],
+      loadFlag: true
     };
   }
     loadData = (pathName, dateName) => {
-        axios.post(pathName).then(res => {
-            this.setState({
-                [dateName]: res.data.data.list
-            })
+        return axios.post(pathName).then(res => {
+            return res.data.data.list
         })
     }
   componentDidMount () {
       // 调用接口加载轮播图数据
-        this.loadData('/homes/swipe','itams');
-        // 调用接口加载菜单数据
-        this.loadData('/homes/menu','menu');
-        // 调用接口加载咨询数据
-        this.loadData('/homes/info','info');
-        // 调用接口加载问答数据
-        this.loadData('/homes/faq','faq');
-        // 调用接口加载房源数据
-        this.loadData('/homes/house','house');
+       let swipe = this.loadData('/homes/swipe','itams');
+       // 调用接口加载菜单数据
+       let menu = this.loadData('/homes/menu','menu');
+    // 调用接口加载咨询数据
+       let info = this.loadData('/homes/info','info');
+       // 调用接口加载问答数据
+       let faq = this.loadData('/homes/faq','faq');
+       // 调用接口加载房源数据
+       let house = this.loadData('/homes/house','house');
+        // 控制遮罩层隐藏
+        Promise.all([swipe,menu,info,faq,house]).then(ret=> {
+            console.log(ret)
+            this.setState({
+                itams:ret[0],
+                menu:ret[1],
+                info:ret[2],
+                faq:ret[3],
+                house:ret[4]
+            }, () => {
+                // 隐藏遮罩层
+                this.setState({
+                    loadFlag: false
+                })
+            })
+        })
   }
   render() {
     return (
       <div className="home-container">
+        <Dimmer inverted active={this.state.loadFlag} page>
+          <Loader>Loading</Loader>
+        </Dimmer>
         <div className="home-topbar">
           <Input fluid icon="search" placeholder="请输入关键词" />
         </div>
