@@ -7,7 +7,20 @@ import 'semantic-ui-css/semantic.min.css'
 import './assets/fonts/iconfont.css'
 import Main from './module/main'
 import Login from './login'
-
+import cfg from './common'
+import axios from 'axios'
+// 设置axios的基准路径
+axios.defaults.baseURL = cfg.baseURL
+// 配置axios请求拦截器
+axios.interceptors.request.use(function (config) {
+  if(!config.url.endsWith('/')){
+    // 给请求地址统一添加token
+    config.headers.Authorization = sessionStorage.getItem('mytoken');
+  }
+  return config;
+}, function (error) {
+  return Promise.reject(error);
+});
 
 function Accc (props) {
   // console.log(props)

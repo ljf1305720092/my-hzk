@@ -13,7 +13,7 @@ function Menu (props) {
     let {path, uname, icon} = props
     return (
         <Route path={path} children={({match})=>{
-            console.log(match)
+            // console.log(match)
             let iconClass = `iconfont icon-${icon}`
             iconClass = match? iconClass +' active': iconClass
             // console.log(iconClass)

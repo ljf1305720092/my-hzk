@@ -26,7 +26,7 @@ class Login extends React.Component {
         // 调用后台接口验证数据  http://47.96.21.88:8086/users/login
         // 客户端接收到token信息然后储存到sessionStorage中
         // 页面跳转
-        let url = 'http://47.96.21.88:8086/users/login';
+        let url = 'users/login';
         let ret = await axios.post(url,{
             uname: this.state.username,
             pwd: this.state.password
@@ -36,9 +36,9 @@ class Login extends React.Component {
             sessionStorage.setItem('mytoken',data.data.token)
             let { history } = this.props;
             history.push('/home')
-            console.log(this.props)
+            // console.log(this.props)
         }
-        console.log(data.meta.msg)
+        // console.log(data.meta.msg)
     }
     render() {
         return (
