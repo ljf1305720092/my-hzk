@@ -48,3 +48,7 @@ line-height: 10px;
 .active {
 color: orange;
 }
+.ui.grid>.row {
+  padding-top: 0;
+  padding-bottom: 0;
+}

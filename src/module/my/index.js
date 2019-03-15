@@ -1,22 +1,50 @@
 import React from "react";
 import { Input, Grid, Icon, Item, Button, Dimmer, Loader } from "semantic-ui-react";
 import ImageGallery from "react-image-gallery";
-import axios from 'axios'
+import {withRouter} from 'react-router-dom';
+import axios from 'axios';
 import "./index.css";
 import "react-image-gallery/styles/css/image-gallery.css";
 import cfg from '../../common';
 // 菜单组件
 function Menu (props) {
-    let {menuData} = props
+  // 在函数组件中没有this
+  let {history, menuData} = props
+  let hanldle = (props) => {
+    // 编程式路由导航  history.push()
+      switch (props) {
+          case '二手房':
+            history.push('/home/list',{query:{mname: props,type: 1}})
+          break;
+          case  '新房' :
+          history.push('/home/list',{query:{mname: props,type: 2}})
+          break;
+          case  '租房' :
+          history.push('/home/list',{query:{mname: props,type: 3}})
+          break;
+          case  '海外' :
+          history.push('/home/list',{query:{mname: props,type: 4}})
+          break;
+          case '计算器':
+          history.push('/home/calc')
+          break;
+          case '地图找房':
+          history.push('/home/map')
+          break;
+          default: 
+          console.log('你错了')
+          break;
+      }
+  }
         let menuContent = menuData.map(item => {
             return (
-              <Grid.Column key={item.id}>
+              <Grid.Column onClick={hanldle.bind(null,item.menu_name)} key={item.id}>
                   <div className="home-menu-item">
                       <Icon name='home' size='big'></Icon>
                   </div>
                   <div>
                       {item.menu_name}
-                  </div>
+                  </div>    
               </Grid.Column>
             )
         })
@@ -157,6 +185,7 @@ class My extends React.Component {
             return res.data.data.list
         })
     }
+    
   componentDidMount () {
       // 调用接口加载轮播图数据
        let swipe = this.loadData('/homes/swipe','itams');
@@ -170,7 +199,6 @@ class My extends React.Component {
        let house = this.loadData('/homes/house','house');
         // 控制遮罩层隐藏
         Promise.all([swipe,menu,info,faq,house]).then(ret=> {
-            console.log(ret)
             this.setState({
                 itams:ret[0],
                 menu:ret[1],
@@ -186,6 +214,7 @@ class My extends React.Component {
         })
   }
   render() {
+    let {history} = this.props 
     return (
       <div className="home-container">
         <Dimmer inverted active={this.state.loadFlag} page>
@@ -202,8 +231,9 @@ class My extends React.Component {
             showThumbnails={false}
             items={this.state.itams} />
             {/* 菜单区域 */}
+            <div className="home-menu"></div>
             <div>
-                <Menu menuData={this.state.menu}></Menu>
+                <Menu history={history} menuData={this.state.menu}></Menu>
             </div>
             {/* 咨询区域 */}
             <div className="home-msg">
@@ -223,4 +253,4 @@ class My extends React.Component {
   }
 }
 
-export default My;
+export default withRouter(My);

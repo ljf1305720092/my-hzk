@@ -7,6 +7,9 @@ import My from './my/index'
 import Info from './info/index'
 import Home from './home/index'
 import Chat from './chat/index'
+import Hlist from './my/hlist'
+import Calc from './my/calc'
+import Mymap from './my/map'
 // 自定义组件：只要有链接出发，children对应的函数就会调用
 function Menu (props) {
     // console.log(props);
@@ -40,6 +43,9 @@ class Main extends React.Component {
                         <Route path='/home/zx' component={Info}></Route>
                         <Route path='/home/wl' component={Home}></Route>
                         <Route path='/home/wd' component={Chat}></Route>
+                        <Route path='/home/list' component={Hlist}></Route>
+                        <Route path='/home/calc' component={Calc}></Route>
+                        <Route path='/home/map' component={Mymap}></Route>
                     </Switch>
                 </div>
                 <div className='main-menu'>

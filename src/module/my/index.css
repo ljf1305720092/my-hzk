@@ -19,6 +19,7 @@
   margin-top: 38px;
   /* padding: 0px; */
   overflow-y: auto;
+  overflow-x: hidden;
 }
 .home-content::-webkit-scrollbar{
   width: 3px;
@@ -127,6 +128,10 @@
   line-height: 40px;
   padding-left: 10px;
   border-bottom: 1px solid #CECECE;
+}
+
+.home-menu {
+  margin-top: 20px;
 }
 
 .ui.grid>.row>.column:nth-child(1) .home-menu-item {
